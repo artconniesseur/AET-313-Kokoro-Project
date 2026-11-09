@@ -1,0 +1,44 @@
+#include <Servo.h>
+
+//!!!rename the variables later to match the scenes!!!
+
+Servo myservo; 
+const int buttonPin = 8; //assigns the switch to digital pin 8
+const int ledPin = 12; //assigns yellow led pin to digital pin 12
+//const int ledPin_13 = 13;
+//const int buttonPin_2 = 2;
+//const int buttonPin_4 = 4;
+
+void setup() {
+  myservo.attach(7); //attaches the servo to pin 7
+  pinMode(8, INPUT); //makes the switch an input
+  //pinMode (2, INPUT);
+  //pinMode (4, INPUT);
+  pinMode(ledPin, OUTPUT); //makes the led pin an output
+  //pinMode(ledPin_13, OUTPUT);
+
+}
+
+void loop() {
+  //check if scene 1 circuit connects
+  if (digitalRead(8) == HIGH){
+    digitalWrite(12, HIGH); //turn LED pin on
+  } else {
+    digitalWrite(12, LOW); //turn LED pin off
+  }
+
+  //check if scene 2 circuit connects
+  if (digitalRead(8) == HIGH){ //***NEED TO CHANGE THIS LATER rn input from 8 activates both for testing
+    myservo.write(90); //turn 90 degrees
+  } else {
+    myservo.write(0); //turn back said degrees or stay at 0 (reset)
+  }
+
+  //check if scene 3 circuit connects
+  if (digitalRead(8) == HIGH){
+    digitalWrite(13, HIGH); //turn LED pin on ***Wire digital pin to breadboard then both led eyes to breadboard
+  } else {
+    digitalWrite(13, LOW); //turn LED pin off
+  }
+
+}
