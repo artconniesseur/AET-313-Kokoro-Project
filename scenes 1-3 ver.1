@@ -21,6 +21,7 @@ void setup() {
 
 void loop() {
   //check if scene 1 circuit connects
+  //i.e. when the wheel is on the correct thought
   if (digitalRead(8) == HIGH){
     digitalWrite(12, HIGH); //turn LED pin on
   } else {
@@ -28,6 +29,7 @@ void loop() {
   }
 
   //check if scene 2 circuit connects
+  //i.e. when the Len cutout slides into the correct place
   if (digitalRead(8) == HIGH){ //***NEED TO CHANGE THIS LATER rn input from 8 activates both for testing
     myservo.write(90); //turn 90 degrees
   } else {
@@ -35,6 +37,7 @@ void loop() {
   }
 
   //check if scene 3 circuit connects
+  //i.e. when the bow is placed on Rin's head
   if (digitalRead(8) == HIGH){
     digitalWrite(13, HIGH); //turn LED pin on ***Wire digital pin to breadboard then both led eyes to breadboard
   } else {
