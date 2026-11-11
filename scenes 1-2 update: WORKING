@@ -1,0 +1,47 @@
+#include <Servo.h>
+
+//!!!rename the variables later to match the scenes!!!
+
+Servo servo_01; 
+const int spinWheel = 3; //assigns the wheel to digital pin 3
+const int ledPin_01 = 2; //assigns yellow led pin to digital pin 2
+const int endPath = 6; //assigns the path to digital pin 6
+
+////////////////////////////////////////////////////////
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(spinWheel, INPUT); //makes the wheel an input
+  pinMode(ledPin_01, OUTPUT); //makes the yellow led pin an output
+  servo_01.attach(5); //attaches the servo to pin 5
+  pinMode(endPath, INPUT); //makes the path an input
+
+}
+
+///////////////////////////////////////////////////////
+
+void loop() {
+  //check if scene 1 circuit connects: wheel is turned to correct thought
+  if (digitalRead(3) == HIGH){
+    Serial.println("high");
+    digitalWrite(ledPin_01, HIGH); //turn LED pin on
+  } else {
+    Serial.println("low");
+    digitalWrite(ledPin_01, LOW); //turn LED pin off
+  }
+
+  //check if scene 2 circuit connects: scientist reaches end of path
+  if (digitalRead(6) == HIGH){ 
+    servo_01.write(90); //turn 90 degrees
+  } else {
+    servo_01.write(0); //turn back said degrees or stay at 0 (reset)
+  }
+
+  //check if scene 3 circuit connects
+  //if (digitalRead(8) == HIGH){
+    //digitalWrite(7, HIGH); //turn LED pin on ***Wire digital pin to breadboard then both led eyes to breadboard
+  //} else {
+    //digitalWrite(7, LOW); //turn LED pin off
+  //}
+
+}
