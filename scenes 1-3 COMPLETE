@@ -1,0 +1,55 @@
+#include <Servo.h>
+
+//assign inputs and outputs to digital pins
+const int spinWheel = 3; 
+const int ledPin_01 = 2; 
+const int endPath = 6; 
+Servo servo_01;
+const int robotSwitch = 12; 
+const int ledPin_02 = 13; 
+const int ledPin_03 = 13; 
+
+////////////////////////////////////////////////////////
+
+void setup() {
+  Serial.begin(9600);
+  //scene 1 makes the wheel input and yellow led pin output
+  pinMode(spinWheel, INPUT); 
+  pinMode(ledPin_01, OUTPUT); 
+  //scene 2 attaches servo to pin 5 and makes the path an input
+  servo_01.attach(5); 
+  pinMode(endPath, INPUT); 
+  //scene 3 makes robot switch an input and white led pins outputs
+  pinMode(robotSwitch, INPUT); 
+  pinMode(ledPin_02, OUTPUT); 
+  pinMode(ledPin_03, OUTPUT); 
+
+}
+
+///////////////////////////////////////////////////////
+
+void loop() {
+  //check if scene 1 circuit connects: wheel is turned to correct thought
+  if (digitalRead(3) == HIGH){
+    Serial.println("high");
+    digitalWrite(ledPin_01, HIGH); //turn LED pin on
+  } else {
+    Serial.println("low");
+    digitalWrite(ledPin_01, LOW); //turn LED pin off
+  }
+
+  //check if scene 2 circuit connects: scientist reaches end of path
+  if (digitalRead(6) == HIGH){ 
+    servo_01.write(90); //turn 90 degrees
+  } else {
+    servo_01.write(0); //turn back said degrees or stay at 0 (reset)
+  }
+
+  //check if scene 3 circuit connects
+  if (digitalRead(12) == HIGH){
+    digitalWrite(13, HIGH); //turn LED pin on 
+  } else {
+    digitalWrite(13, LOW); //turn LED pin off
+  }
+
+}
